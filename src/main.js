@@ -1,6 +1,6 @@
 import iziToast from "izitoast";
 import getImagesByQuery from "./js/pixabay-api";
-import {showLoader, hideLoader, createGallery, gallery } from "./js/render-function";
+import {showLoader, hideLoader, createGallery } from "./js/render-function";
 
 
 const form = document.querySelector('.form');
@@ -13,7 +13,6 @@ const errorText = {
     api: {
         title: 'Sorry,',
         message: 'there are no images matching your search query. Please try again!'}
-    
 }
 
 function validInput({ title, message}) {
@@ -29,9 +28,9 @@ function validInput({ title, message}) {
 
 form.addEventListener('submit', (ev) => {
     ev.preventDefault();
-    form.noValidate = true;
 
     const inputData = new FormData(form);
+    
     if (inputData.get('search-text').trim() === '') {
         return validInput(errorText.user);
     }
@@ -39,9 +38,9 @@ form.addEventListener('submit', (ev) => {
     showLoader();
 
     getImagesByQuery(inputData.get('search-text').trim())
-        .then(({data}) => {
+        .then(({ data }) => {
             if (data.total === 0) return validInput(errorText.api);
-            gallery.innerHTML = createGallery(data);
+            createGallery(data);
         })
         .catch((error) => {
             console.log(error.message);

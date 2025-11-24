@@ -4,17 +4,20 @@ export const gallery = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
 
 const lightbox = new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
-    captionPosition: 'bottom',
-    captionDelay: 250,
-});
+        captionsData: 'alt',
+        captionPosition: 'bottom',
+        captionDelay: 250,
+    });
 
-export function createGallery({hits}) {
+export function createGallery({ hits }) {
+    clearGallery();
+    const markup = hits.map(imageTemplate).join('');
+    gallery.insertAdjacentHTML('afterbegin', markup);
+
     lightbox.refresh();
-    return hits.map(imageTemplate).join('');
 }
 
-function imageTemplate(img){
+function imageTemplate(img) {
     return `<li class="gallery-item">
                 <a class="gallery-link" href="${img.largeImageURL }">
                     <img
@@ -51,3 +54,5 @@ export function showLoader() {
 export function hideLoader() {
     loader.classList.add('hidden');
 }
+
+
