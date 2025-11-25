@@ -1,6 +1,6 @@
 import iziToast from "izitoast";
 import getImagesByQuery from "./js/pixabay-api";
-import {showLoader, hideLoader, createGallery } from "./js/render-function";
+import {showLoader, hideLoader, createGallery } from "./js/render-functions";
 
 
 const form = document.querySelector('.form');
