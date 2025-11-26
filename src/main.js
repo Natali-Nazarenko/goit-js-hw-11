@@ -38,9 +38,9 @@ form.addEventListener('submit', (ev) => {
     showLoader();
 
     getImagesByQuery(inputData.get('search-text').trim())
-        .then(({ data }) => {
+        .then((data) => {
             if (data.total === 0) return validInput(errorText.api);
-            createGallery(data);
+            createGallery(data.hits);
         })
         .catch((error) => {
             console.log(error.message);

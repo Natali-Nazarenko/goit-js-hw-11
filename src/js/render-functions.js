@@ -9,7 +9,7 @@ const lightbox = new SimpleLightbox('.gallery a', {
         captionDelay: 250,
     });
 
-export function createGallery({ hits }) {
+export function createGallery(hits) {
     clearGallery();
     const markup = hits.map(imageTemplate).join('');
     gallery.insertAdjacentHTML('afterbegin', markup);
